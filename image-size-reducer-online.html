@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Compress Images in Seconds and Save Space</title>
+  <meta name="description" content="Reduce photo size easily with our image size reducer. Speed up website performance and save space effortlessly." />
+  <meta name="keywords" content="4k image compressor​, 256kb image compressor​, 30kb image compressor​, jpg to 100kb, compress image to 100kb, compress jpg to 100kb, resize image to 100kb, compress image, pi7 image compressor​, jpg compress to 100kb​, compress jpg file to 100kb​, compress to 100kb jpg​, jpg file compressor to 100kb​, reduce jpg file size to 100kb​, compress jpg image to 100kb online" />
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+  }
+  h1 {
+    margin-bottom: 0.2em;
+    font-weight: 700;
+  }
+
+  /* Container */
+  .container {
+    max-width: 480px;
+    width: 100%;
+  }
+
+  /* Drag and Drop Area */
+  .drop-area {
+    border: 3px dashed #21f372;
+    border-radius: 12px;
+    padding: 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    min-height: 220px;
+    position: relative;
+  }
+  .drop-area.dragover {
+    background-color: #e3f2fd;
+  }
+  .drop-area input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+  }
+  .drop-area p {
+    margin: 0.5em 0 1em;
+    font-size: 1.1rem;
+    text-align: center;
+    color: #2196f3;
+  }
+
+  /* Display uploaded image details */
+  .image-info {
+    margin-top: 1em;
+    text-align: center;
+  }
+  .image-info img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 0.5em;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+  }
+  .file-meta {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  /* Controls */
+  .controls {
+    margin-top: 1.3em;
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .controls label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #2196f3;
+  }
+  .controls input[type="number"] {
+    width: 100px;
+    padding: 0.35em 0.5em;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1.5px solid #2196f3;
+    color: #222;
+    outline-offset: 2px;
+    outline-color: #2196f3;
+  }
+  .controls button {
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    padding: 0.6em 1.4em;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+  .controls button:hover:not(:disabled) {
+    background-color: #1769aa;
+  }
+  .controls button:disabled {
+    background-color: #90caf9;
+    cursor: not-allowed;
+  }
+
+  /* Result Area */
+  .result {
+    margin-top: 2em;
+    text-align: center;
+  }
+  .result img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 0.5em;
+    box-shadow: 0 2px 12px rgba(33, 150, 243, 0.35);
+  }
+  .download-link {
+    display: inline-block;
+    margin-top: 0.5em;
+    font-weight: 600;
+    color: #2196f3;
+    text-decoration: none;
+    border: 1.5px solid #2196f3;
+    padding: 0.4em 1em;
+    border-radius: 7px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .download-link:hover {
+    background-color: #2196f3;
+    color: #fff;
+  }
+
+  /* Responsive typography */
+  @media (max-width: 400px) {
+    .controls {
+      flex-direction: column;
+    }
+    .controls input[type="number"] {
+      width: 100%;
+    }
+    .controls button {
+      width: 100%;
+    }
+  }
+
+  /* Footer styling (paste at end of existing styles) */
+footer.site-footer {
+  background: #fff;
+  border-top: 1px solid #e6e6e6;
+  padding: 14px 0;
+  margin-top: 1.5em;
+  width: 100%;
+  box-sizing: border-box;
+  color: #222;
+  font-size: 14px;
+}
+footer .footer-inner {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 1em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+footer .footer-nav {
+  display: flex;
+  gap: 0.75rem;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-items: center;
+}
+footer .footer-nav a {
+  color: #2196f3;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+footer .footer-nav a:hover {
+  text-decoration: underline;
+}
+footer .footer-social {
+  display: flex;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+  align-items: center;
+}
+footer .social-btn {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #2196f3;
+  transition: background-color 0.15s, color 0.15s;
+  border: 1px solid transparent;
+}
+footer .social-btn:hover {
+  background: #f2f8ff;
+  color: #1769aa;
+  border-color: #e1f0ff;
+}
+footer .social-btn svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: currentColor;
+}
+@media (max-width: 420px) {
+  footer .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  footer .footer-nav {
+    justify-content: center;
+  }
+}
+
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Image Compressor</h1>
+    <div class="drop-area" id="drop-area">
+      <p>Drag & Drop an image here or click to upload</p>
+      <input type="file" id="fileElem" accept="image/*" />
+      <div class="image-info" id="image-info"></div>
+    </div>
+    <div class="controls">
+      <label for="targetSize">Target file size (KB):</label>
+      <input type="number" id="targetSize" min="10" max="5000" value="100" />
+      <button id="compressBtn" disabled>Compress Image</button>
+    </div>
+    <div class="result" id="result"></div>
+  </div>
+  
+  <footer class="site-footer" aria-label="Site footer">
+  <div class="footer-inner">
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="./" aria-label="Home">Home</a>
+      <a href="./about" aria-label="About">About</a>
+      <a href="./disclaimer" aria-label="Disclaimer">Disclaimer</a>
+      <a href="./privacy-policy" aria-label="Privacy Policy">Privacy Policy</a>
+      <a href="./contact" aria-label="Contact">Contact</a>
+    </nav>
+
+    <div class="footer-social" aria-label="Share links">
+      <!-- Facebook share -->
+      <a class="social-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://crezzmrezz.com/images-size-reducer-online.html" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+        <!-- Facebook SVG -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 4.99 3.66 9.12 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.76-1.61 1.54v1.86h2.74l-.44 2.9h-2.3V22c4.78-.81 8.44-4.94 8.44-9.93z"/></svg>
+      </a>
+
+      <!-- Instagram profile (no direct share URL available) -->
+      <a class="social-btn" href="https://www.instagram.com/crezzmrezz.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+        <!-- Instagram SVG -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 7.8A4.2 4.2 0 1 0 16.2 14 4.2 4.2 0 0 0 12 9.8zm5.4-3.9a1.2 1.2 0 1 0 1.2 1.2 1.2 1.2 0 0 0-1.2-1.2z"/></svg>
+      </a>
+
+      <!-- Twitter share -->
+      <a class="social-btn" href="https://twitter.com/intent/tweet?text=Check%20this%20out&url=https://crezzmrezz.com/images-size-reducer-online.html" target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">
+        <!-- Twitter SVG -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 5.92c-.63.28-1.3.47-2 .56a3.48 3.48 0 0 0 1.52-1.92 6.86 6.86 0 0 1-2.2.84A3.42 3.42 0 0 0 11.5 8.6c0 .27.03.54.09.79A9.72 9.72 0 0 1 3.1 6.2a3.4 3.4 0 0 0 .97 4.56c-.56 0-1.09-.17-1.55-.42v.04a3.43 3.43 0 0 0 2.75 3.36c-.5.14-1.02.17-1.56.06a3.45 3.45 0 0 0 3.22 2.38A6.87 6.87 0 0 1 2 19.54a9.68 9.68 0 0 0 5.26 1.54c6.3 0 9.75-5.22 9.75-9.75v-.44A6.86 6.86 0 0 0 22 5.92z"/></svg>
+      </a>
+
+      <!-- Email share -->
+      <a class="social-btn" href="mailto:?subject=Check%20this%20out&body=I%20thought%20you%20might%20like%20this%20page%20-%20https%3A%2F%2Fhttps://crezzmrezz.com/images-size-reducer-online.html" aria-label="Share by email">
+        <!-- Email SVG -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.1l-8 4.9-8-4.9V6l8 4.9L20 6v2.1z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+
+<script>
+  const dropArea = document.getElementById('drop-area');
+  const fileInput = document.getElementById('fileElem');
+  const imageInfo = document.getElementById('image-info');
+  const compressBtn = document.getElementById('compressBtn');
+  const targetSizeInput = document.getElementById('targetSize');
+  const resultArea = document.getElementById('result');
+
+  let originalFile = null;
+  let originalImage = null;
+
+  // Helpers to format file size
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + " Bytes";
+    else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + " KB";
+    else return (bytes / 1048576).toFixed(2) + " MB";
+  }
+
+  // Show file and image info in drop area
+  function showImageInfo(file, imgSrc) {
+    imageInfo.innerHTML = `
+      <img src="${imgSrc}" alt="Uploaded Image" />
+      <div class="file-meta"><strong>Name:</strong> ${file.name}</div>
+      <div class="file-meta"><strong>Size:</strong> ${formatBytes(file.size)}</div>
+    `;
+  }
+
+  // Handle files
+  function handleFiles(files) {
+    if (files.length === 0) return;
+    const file = files[0];
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload an image file.');
+      return;
+    }
+    originalFile = file;
+    const reader = new FileReader();
+    reader.onload = e => {
+      originalImage = e.target.result;
+      showImageInfo(file, originalImage);
+      compressBtn.disabled = false;
+      resultArea.innerHTML = '';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // Drag events
+  dropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropArea.classList.add('dragover');
+  });
+  dropArea.addEventListener('dragleave', () => {
+    dropArea.classList.remove('dragover');
+  });
+  dropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropArea.classList.remove('dragover');
+    if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+  });
+  dropArea.addEventListener('click', () => {
+    fileInput.click();
+  });
+  fileInput.addEventListener('change', () => {
+    handleFiles(fileInput.files);
+  });
+
+  // Image compression logic
+  async function compressImage(file, targetKB) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Initial dimensions
+        let [width, height] = [img.width, img.height];
+
+        // Set canvas size
+        canvas.width = width;
+        canvas.height = height;
+
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Compress with stepwise quality reduction using binary search
+        let qualityLow = 0.1;
+        let qualityHigh = 0.95;
+        let quality = qualityHigh;
+        let lastDataUrl = null;
+
+        // Max tries for binary search
+        let tries = 10;
+
+        const targetBytes = targetKB * 1024;
+
+        (function tryCompress() {
+          const dataUrl = canvas.toDataURL('image/jpeg', quality);
+          const bytes = dataURLtoBlob(dataUrl).size;
+
+          if (bytes <= targetBytes || tries <= 0) {
+            resolve({dataUrl, size: bytes});
+            return;
+          }
+
+          // Decrease quality and try again
+          qualityHigh = quality;
+          quality = (qualityLow + qualityHigh) / 2;
+          tries--;
+
+          tryCompress();
+        })();
+      };
+      img.onerror = () => reject(new Error('Image load error'));
+      const reader = new FileReader();
+      reader.onload = e => {
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Convert DataURL to Blob helper
+  function dataURLtoBlob(dataurl) {
+    const arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    for (let i = 0; i < n; i++) {
+      u8arr[i] = bstr.charCodeAt(i);
+    }
+    return new Blob([u8arr], {type:mime});
+  }
+
+  compressBtn.addEventListener('click', async () => {
+    if (!originalFile) return;
+    compressBtn.disabled = true;
+    compressBtn.textContent = 'Compressing...';
+    resultArea.innerHTML = '';
+
+    let targetKB = parseInt(targetSizeInput.value);
+    if (isNaN(targetKB) || targetKB < 10) targetKB = 100;
+
+    try {
+      const compressed = await compressImage(originalFile, targetKB);
+
+      resultArea.innerHTML = `
+        <h2>Compressed Image</h2>
+        <img src="${compressed.dataUrl}" alt="Compressed Image" />
+        <div class="file-meta"><strong>Size:</strong> ${formatBytes(compressed.size)}</div>
+        <a href="${compressed.dataUrl}" download="compressed_${originalFile.name}" class="download-link">Download</a>
+      `;
+    } catch (error) {
+      alert('Compression failed: ' + error.message);
+    }
+
+    compressBtn.textContent = 'Compress Image';
+    compressBtn.disabled = false;
+  });
+</script>
+</body>
+</html>
